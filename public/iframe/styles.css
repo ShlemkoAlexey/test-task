@@ -1,7 +1,7 @@
 .block {
     padding: 5px 10px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .block .title {
@@ -25,7 +25,7 @@
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     border-radius: 0.25rem;
-    margin: 0 5px;
+    margin: 0 5px 0 0;
 }
 
 .block #accept-button {

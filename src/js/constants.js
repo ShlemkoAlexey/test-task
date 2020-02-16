@@ -8,3 +8,9 @@ export const STATUS = Object.freeze({
         NAME: 'Decline',
     }
 });
+
+export function parseStatus(status) {
+    for (let i in STATUS) {
+        if (STATUS[i].ID === status) return STATUS[i].NAME;
+    }
+}

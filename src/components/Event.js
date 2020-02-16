@@ -41,16 +41,16 @@ export default class Event extends React.Component {
     }
 
     loadEventData() {
-        return new Promise((resolve, reject) => {
-            resolve(dummyData);
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(dummyData);
+            }, randomDelay(2, 5) * 1000)
         });
     }
 
     componentDidMount() {
         this.loadEventData().then(response =>
-            setTimeout(() => {
-                this.setState({eventInfo: response})
-            }, randomDelay(2, 5) * 1000)
+            this.setState({eventInfo: response})
         )
     }
 }

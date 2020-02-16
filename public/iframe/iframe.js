@@ -10,7 +10,6 @@ const STATUS = Object.freeze({
 });
 
 function parseStatus(status) {
-    console.log('stats', status)
     for (let i in STATUS) {
         if (STATUS[i].ID === status) return STATUS[i].NAME;
     }

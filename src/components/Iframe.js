@@ -11,7 +11,7 @@ export default function Iframe(props) {
     };
 
     return (
-        <iframe id='iframe'
+        <iframe id='iframe' title='iframe'
             src={`/iframe?email=${props.user.email}&name=${props.user.name}&status=${props.user.invitationStatus}&id=${props.user.id}`}
         >
         </iframe>

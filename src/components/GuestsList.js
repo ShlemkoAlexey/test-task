@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Iframe from "./Iframe";
-import {STATUS} from "../js/constants";
+import {parseStatus, STATUS} from "../js/constants";
 
 /**
  * @return {null}
@@ -20,7 +20,6 @@ export default function GuestsList(props) {
     }
 
     function List(props) {
-        /** @namespace props.eventGuests */
         return props.eventGuests ?
             props.eventGuests.map(item => {
                 return (
@@ -28,12 +27,11 @@ export default function GuestsList(props) {
                         <div className="row">
                             <div className="col">{item.name}</div>
                             <div className="col">{item.email}</div>
-                            <div className="col">{parseStatus(item.invitationStatus)}</div>
+                            <div className={"col " + (item.invitationStatus === STATUS.ACCEPT.ID ? "text-success" : "text-danger")}>{parseStatus(item.invitationStatus)}</div>
                             <div className="col">
-                                <button
-                                    className='btn btn-block btn-info text-uppercase'
-                                    onClick={openModal.bind(this, item)}
-                                >manage
+                                <button className='btn btn-block btn-info text-uppercase'
+                                        onClick={openModal.bind(this, item)}>
+                                    manage
                                 </button>
                             </div>
                         </div>
@@ -42,7 +40,7 @@ export default function GuestsList(props) {
             }) : null;
     }
 
-    function Modal(props) {
+    function Modal() {
         return (
             <div className="modal iframe-modal" tabIndex="-1" role="dialog">
                 <div className="modal-content">
@@ -68,11 +66,5 @@ export default function GuestsList(props) {
             return +item.id === +id;
         });
         guest.invitationStatus = status;
-    }
-
-    function parseStatus(status) {
-        for (let i in STATUS) {
-            if (STATUS[i].ID === status) return STATUS[i].NAME;
-        }
     }
 }
