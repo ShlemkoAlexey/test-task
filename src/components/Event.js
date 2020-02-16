@@ -50,7 +50,7 @@ export default class Event extends React.Component {
         this.loadEventData().then(response =>
             setTimeout(() => {
                 this.setState({eventInfo: response})
-            }, randomDelay(0, 0) * 1000)
+            }, randomDelay(2, 5) * 1000)
         )
     }
 }
