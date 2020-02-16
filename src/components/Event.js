@@ -1,7 +1,8 @@
 import * as React from "react";
 import GuestsList from "./GuestsList";
 import {dummyData} from "../js/dummyData";
-import {emulateLoadingDelay} from "../js/helpers";
+import {randomDelay} from "../js/helpers";
+import Preloader from "./Preloader";
 
 export default class Event extends React.Component {
 
@@ -10,35 +11,46 @@ export default class Event extends React.Component {
         this.state = {
             eventInfo: null,
         };
-
-        // this.loadEventData = emulateLoadingDelay(this.loadEventData);
     }
 
     render() {
-        return (
-            <div className='container-fluid'>
-                <div className="row">
-                    <div className="col-12">{this.state.eventInfo ? this.state.eventInfo.eventName : null}</div>
+        if (!this.state.eventInfo) {
+            return <Preloader/>;
+        }
+        else {
+            return (
+                <div className='container-fluid'>
+                    <div className="row">
+                        <div className="col-12">
+                            <h3>{this.state.eventInfo ? this.state.eventInfo.eventName : null}</h3>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <h4>Guests List:</h4>
+                        </div>
+                    </div>
+                    <div className="list-group">
+                        <GuestsList
+                            eventGuests={this.state.eventInfo ? this.state.eventInfo.guests : null}
+                        />
+                    </div>
                 </div>
-                <div className="row">
-                    <div className="col-12">Guests List:</div>
-                </div>
-                <GuestsList
-                    eventGuests={this.state.eventInfo ? this.state.eventInfo.guests : null}
-                />
-            </div>
-        )
+            )
+        }
     }
 
     loadEventData() {
         return new Promise((resolve, reject) => {
             resolve(dummyData);
         });
-
     }
 
     componentDidMount() {
-        this.loadEventData()
-            .then(response => this.setState({eventInfo: response}))
+        this.loadEventData().then(response =>
+            setTimeout(() => {
+                this.setState({eventInfo: response})
+            }, randomDelay(0, 0) * 1000)
+        )
     }
 }

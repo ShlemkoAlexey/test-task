@@ -1,7 +1,7 @@
 import {STATUS} from "./constants";
 
 export const dummyData = {
-    eventName: 'event1',
+    eventName: 'Random event',
     guests: [
         {
             id: 1,
@@ -11,15 +11,9 @@ export const dummyData = {
         },
         {
             id: 2,
-            name: 'John Doe 2',
-            email: 'john.doe2@gmail.com',
+            name: 'Jane Doe',
+            email: 'jane.doe@gmail.com',
             invitationStatus: STATUS.DECLINE.ID,
         },
-        {
-            id: 3,
-            name: 'John Doe 3',
-            email: 'john.doe3@gmail.com',
-            invitationStatus: STATUS.ACCEPT.ID,
-        }
     ]
 };
